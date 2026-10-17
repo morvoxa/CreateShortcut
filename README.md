@@ -1,31 +1,36 @@
-# CreateShortcut
+# 🚀 CreateShortcut
 
-Utilitas ringan dan cepat berbasis **C dan GTK 3** untuk membuat serta mengelola file `.desktop` (XDG application launcher) secara instan di Linux. Dirancang khusus untuk performa tinggi, tanpa *overhead* berat, dan berjalan mulus di lingkungan Wayland maupun X11.
+[![License: MIT](https://shields.io)](https://opensource.org)
 
----
-
-## Fitur Utama
-
-- **Tab Create**: Membuat shortcut baru dengan mudah melalui input *Name* dan *Command*, dilengkapi tombol *File Picker* (`Open`) untuk memilih *executable* secara langsung.
-- **Tab Manage**: Memindai direktori `~/.local/share/applications/` secara otomatis untuk melihat daftar shortcut yang ada sekaligus menyediakan tombol *Delete* untuk menghapusnya (secara aman mengecualikan aplikasi ini sendiri).
-- **Integrasi Sistem**: Otomatis mendaftarkan kategori aplikasi (`Utility`) agar langsung terindeks oleh *app launcher* seperti `xfce4-appfinder`, `rofi`, `wofi`, atau `fuzzel`.
+**CreateShortcut** adalah utilitas desktop Linux ringan berbasis C dan GTK 3 untuk membuat dan mengelola file `.desktop` (XDG Application Launcher) secara instan, serta mendukung Wayland dan X11.
 
 ---
 
-## Dependensi
+## ✨ Fitur Utama
 
-Sebelum melakukan *compile*, pastikan sistemmu sudah terinstal:
-- `gcc` (GNU Compiler Collection)
-- `pkg-config`
-- `gtk+-3.0` (Development libraries)
+*   **🛠️ Tab Create:** Membuat *shortcut* baru via nama, perintah, atau *File Picker*.
+*   **📂 Tab Manage:** Memindai `~/.local/share/applications/` dan menyediakan opsi hapus yang aman.
+*   **⚙️ Integrasi Sistem:** Otomatis berkategori `Utility` dan terindeks di *app launcher* (`rofi`, `wofi`, dll).
 
 ---
 
-## Cara Instalasi & Build
+## 📦 Dependensi & Instalasi
 
-Proyek ini dilengkapi dengan `Makefile` untuk memudahkan kompilasi dan instalasi otomatis ke direktori lokal (`~/.local/`).
+Membutuhkan `gcc`, `pkg-config`, dan `gtk+-3.0`.
 
-1. Clone atau simpan seluruh file proyek ke dalam satu folder.
-2. Jalankan perintah berikut untuk meng-compile dan menginstalnya ke sistem:
-   ```bash
-   make install
+| Distro Linux | Perintah Instalasi |
+| :--- | :--- |
+| **Ubuntu / Debian / Mint** | `sudo apt install build-essential pkg-config libgtk-3-dev` |
+| **Fedora** | `sudo dnf groupinstall "Development Tools" && sudo dnf install gtk3-devel` |
+| **Arch Linux** | `sudo pacman -S base-devel gtk3` |
+
+### Build & Install (Tanpa Sudo)
+```bash
+make install
+```
+
+> ⚠️ **Catatan `$PATH`**: Pastikan `~/.local/bin` terdaftar di `$PATH` Anda (tambahkan `export PATH="$HOME/.local/bin:$PATH"` ke `~/.bashrc` atau `~/.zshrc` jika aplikasi tidak terdeteksi).
+
+---
+
+Dirilis di bawah [MIT License](LICENSE).
