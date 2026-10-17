@@ -1,11 +1,11 @@
 ### 💡 Why CreateShortcut?
 
-> **Tired of running AppImages or custom binaries manually from the terminal?**
->
-> Stop writing `.desktop` files by hand! With **CreateShortcut**, you can instantly turn any executable, AppImage, or script into a clean desktop entry with just a few clicks. It pops up right away in your favorite app launchers (`rofi`, `wofi`, `fuzzel`, `hyprlauncher`, etc.).
->
-> Made a mistake or want to clean up? No worries—just head over to the **Manage** tab, hit delete, and recreate it in seconds!
-> Of Course Works Wayland or X11
+ **Tired of running AppImages or custom binaries manually from the terminal?**
+
+ Stop writing `.desktop` files by hand! With **CreateShortcut**, you can instantly turn any executable, AppImage, or script into a clean desktop entry with just a few clicks. It pops up right away in your favorite app launchers (`rofi`, `wofi`, `fuzzel`, `hyprlauncher`, etc.).
+
+ Made a mistake or want to clean up? No worries—just head over to the **Manage** tab, hit delete, and recreate it in seconds!
+ Of Course Works Wayland or X11
 
 ---
 
