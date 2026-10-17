@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=CreateShortcut
+Comment=Utility ringkas untuk membuat file .desktop
+Exec=CreateShortcut
+Icon=applications-other
+Terminal=false
+Categories=Utility;
