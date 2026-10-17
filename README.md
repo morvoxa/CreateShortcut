@@ -33,6 +33,7 @@ Requires `gcc`, `pkg-config`, and `gtk+-3.0`.
 ### Build & Install (Rootless / No Sudo)
 ```bash
 make install
+```
 
 Running `make install` automatically handles two steps:
 1. Copies the `CreateShortcut` executable binary directly into **`~/.local/bin/`**. Make sure this path is included in your system's `$PATH` environment variable (add `export PATH="$HOME/.local/bin:$PATH"` to your `~/.bashrc` or `~/.zshrc` if command-line execution isn't detected).
