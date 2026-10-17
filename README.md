@@ -12,6 +12,14 @@
 
 ---
 
+## 📸 Cuplikan Layar (Screenshots)
+
+| Tab Pembuat Shortcut (Create) | Tab Manajemen Shortcut (Manage) |
+| :---: | :---: |
+| ![Tab Create](img/Screenshot%20from%202026-10-17%2015-45-39.png) | ![Tab Manage](img/Screenshot%20from%202026-10-17%2015-45-50.png) |
+
+---
+
 ## 📦 Dependensi & Instalasi
 
 Membutuhkan `gcc`, `pkg-config`, dan `gtk+-3.0`.
