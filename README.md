@@ -1,7 +1,5 @@
 # 🚀 CreateShortcut
 
-[![License: MIT](https://shields.io)](https://opensource.org)
-
 **CreateShortcut** adalah utilitas desktop Linux ringan berbasis C dan GTK 3 untuk membuat dan mengelola file `.desktop` (XDG Application Launcher) secara instan, serta mendukung Wayland dan X11.
 
 ---
@@ -28,9 +26,6 @@ Membutuhkan `gcc`, `pkg-config`, dan `gtk+-3.0`.
 ```bash
 make install
 ```
-
 > ⚠️ **Catatan `$PATH`**: Pastikan `~/.local/bin` terdaftar di `$PATH` Anda (tambahkan `export PATH="$HOME/.local/bin:$PATH"` ke `~/.bashrc` atau `~/.zshrc` jika aplikasi tidak terdeteksi).
 
 ---
-
-Dirilis di bawah [MIT License](LICENSE).
