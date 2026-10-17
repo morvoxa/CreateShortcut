@@ -1,39 +1,35 @@
 # 🚀 CreateShortcut
 
-**CreateShortcut** adalah utilitas desktop Linux ringan berbasis C dan GTK 3 untuk membuat dan mengelola file `.desktop` (XDG Application Launcher) secara instan, serta mendukung Wayland dan X11.
+**CreateShortcut** is a lightweight, high-performance Linux desktop utility built with C and GTK 3 to instantly create and manage `.desktop` files (XDG Application Launchers), with full support for both Wayland and X11.
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Key Features
 
-*   **🛠️ Tab Create:** Membuat *shortcut* baru via nama, perintah, atau *File Picker*.
-*   **📂 Tab Manage:** Memindai `~/.local/share/applications/` dan menyediakan opsi hapus yang aman.
-*   **⚙️ Integrasi Sistem:** Otomatis berkategori `Utility` dan terindeks di *app launcher* (`rofi`, `wofi`, dll).
+*   **🛠️ Create Tab:** Easily create new shortcuts using custom names, commands, or the built-in *File Picker*.
+*   **📂 Manage Tab:** Automatically scans `~/.local/share/applications/` and provides safe removal options.
+*   **⚙️ System Integration:** Automatically categorized as `Utility` and instantly indexed by modern *app launchers* (`rofi`, `wofi`, `fuzzel`, etc.).
 
 ---
 
-## 📸 Cuplikan Layar (Screenshots)
+## 📸 Screenshots
 
-| Tab Pembuat Shortcut (Create) | Tab Manajemen Shortcut (Manage) |
+| Create Shortcut Tab | Manage Shortcuts Tab |
 | :---: | :---: |
 | ![Tab Create](img/Screenshot%20from%202026-10-17%2015-45-39.png) | ![Tab Manage](img/Screenshot%20from%202026-10-17%2015-45-50.png) |
 
 ---
 
-## 📦 Dependensi & Instalasi
+## 📦 Dependencies & Installation
 
-Membutuhkan `gcc`, `pkg-config`, dan `gtk+-3.0`.
+Requires `gcc`, `pkg-config`, and `gtk+-3.0`.
 
-| Distro Linux | Perintah Instalasi |
+| Linux Distribution | Installation Command |
 | :--- | :--- |
 | **Ubuntu / Debian / Mint** | `sudo apt install build-essential pkg-config libgtk-3-dev` |
 | **Fedora** | `sudo dnf groupinstall "Development Tools" && sudo dnf install gtk3-devel` |
 | **Arch Linux** | `sudo pacman -S base-devel gtk3` |
 
-### Build & Install (Tanpa Sudo)
+### Build & Install (Rootless / No Sudo)
 ```bash
 make install
-```
-> ⚠️ **Catatan `$PATH`**: Pastikan `~/.local/bin` terdaftar di `$PATH` Anda (tambahkan `export PATH="$HOME/.local/bin:$PATH"` ke `~/.bashrc` atau `~/.zshrc` jika aplikasi tidak terdeteksi).
-
----

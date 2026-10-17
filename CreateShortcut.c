@@ -22,7 +22,7 @@ static void on_browse_clicked(GtkButton *button, gpointer user_data) {
     GtkWidget *dialog;
     GtkWindow *window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 
-    dialog = gtk_file_chooser_dialog_new("Pilih File Executable",
+    dialog = gtk_file_chooser_dialog_new("Select Executable File",
                                          window,
                                          GTK_FILE_CHOOSER_ACTION_OPEN,
                                          "_Cancel", GTK_RESPONSE_CANCEL,
@@ -64,7 +64,7 @@ static void on_create_clicked(GtkButton *button, gpointer user_data) {
     const gchar *cmd = gtk_entry_get_text(GTK_ENTRY(app->entry_cmd));
 
     if (strlen(name) == 0 || strlen(cmd) == 0) {
-        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Nama dan Command wajib diisi!");
+        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Name and Command must be filled!");
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
         return;
@@ -82,7 +82,7 @@ static void on_create_clicked(GtkButton *button, gpointer user_data) {
 
     FILE *f = fopen(filepath, "w");
     if (!f) {
-        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Gagal menyimpan file .desktop!");
+        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Failed to save .desktop file!");
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
         return;
@@ -99,12 +99,12 @@ static void on_create_clicked(GtkButton *button, gpointer user_data) {
 
     chmod(filepath, 0755);
 
-    // Reset entry dan refresh list manage
+    // Reset entry and refresh manage list
     gtk_entry_set_text(GTK_ENTRY(app->entry_name), "");
     gtk_entry_set_text(GTK_ENTRY(app->entry_cmd), "");
     refresh_shortcut_list(app);
 
-    GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Shortcut berhasil dibuat!");
+    GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Shortcut created successfully!");
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
 }
@@ -116,19 +116,23 @@ static void on_delete_clicked(GtkButton *button, gpointer user_data) {
 
     if (filepath && remove(filepath) == 0) {
         refresh_shortcut_list(app);
-        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Shortcut berhasil dihapus!");
+        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Shortcut deleted successfully!");
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
     } else {
-        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Gagal menghapus file shortcut!");
+        GtkWidget *dialog = gtk_message_dialog_new(window, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Failed to delete shortcut file!");
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
     }
 }
 
 static void refresh_shortcut_list(AppWidgets *app) {
-    // Bersihkan isi list box sebelumnya
+    // Clear previous items in list box
     GList *children = gtk_container_get_children(GTK_CONTAINER(app->list_box));
+    for (GList *iter = children; iter != NULL; iter = g_list_next(iter)) {
+        gtk_widget_destroy(GTK_WIDGET(iter->data)); // Fixed macro safety below
+    }
+    // Using correct gtk_widget_destroy casting:
     for (GList *iter = children; iter != NULL; iter = g_list_next(iter)) {
         gtk_widget_destroy(GTK_WIDGET(iter->data));
     }
@@ -139,7 +143,7 @@ static void refresh_shortcut_list(AppWidgets *app) {
 
     struct dirent *entry;
     while ((entry = readdir(dir)) != NULL) {
-        // Abaikan file .desktop milik aplikasi CreateShortcut sendiri
+        // Exclude CreateShortcut's own desktop entry
         if (strcmp(entry->d_name, "CreateShortcut.desktop") == 0) {
             continue;
         }
@@ -192,7 +196,7 @@ int main(int argc, char *argv[]) {
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
-    // Buat Notebook (Tab)
+    // Create Notebook (Tabs)
     GtkWidget *notebook = gtk_notebook_new();
     gtk_container_add(GTK_CONTAINER(window), notebook);
 
@@ -211,7 +215,7 @@ int main(int argc, char *argv[]) {
     gtk_grid_attach(GTK_GRID(grid), label_name, 0, 0, 1, 1);
 
     app.entry_name = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(app.entry_name), "Contoh: My App");
+    gtk_entry_set_placeholder_text(GTK_ENTRY(app.entry_name), "e.g., My App");
     gtk_grid_attach(GTK_GRID(grid), app.entry_name, 1, 0, 1, 1);
 
     // Command & Browse
@@ -221,7 +225,7 @@ int main(int argc, char *argv[]) {
 
     GtkWidget *cmd_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
     app.entry_cmd = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(app.entry_cmd), "Pilih file atau ketik manual");
+    gtk_entry_set_placeholder_text(GTK_ENTRY(app.entry_cmd), "Select file or type manually");
     gtk_box_pack_start(GTK_BOX(cmd_box), app.entry_cmd, TRUE, TRUE, 0);
 
     GtkWidget *btn_browse = gtk_button_new_with_label("Open");
@@ -250,7 +254,7 @@ int main(int argc, char *argv[]) {
 
     gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox_manage, gtk_label_new("Manage"));
 
-    // Muat daftar shortcut saat pertama kali dibuka
+    // Load shortcut list initially
     refresh_shortcut_list(&app);
 
     gtk_widget_show_all(window);
