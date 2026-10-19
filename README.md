@@ -52,3 +52,28 @@ Running `make install` automatically handles two steps:
 2. Copies `CreateShortcut.desktop` to **`~/.local/share/applications/`** so the application instantly appears and can be launched from your favorite app launcher (`rofi`, `wofi`, `fuzzel`, `xfce4-appfinder`, etc.).
 
 > 💡 **Recommended**: Ensure `~/.local/bin` is in your `$PATH` so you can launch the binary seamlessly from anywhere!
+
+## 📦 Nix Support with flake
+```nix
+  description = "A very basic flake";
+
+  inputs = {
+    nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+    CreateShortcut.url = "github:morvoxa/CreateShortcut";
+  };
+
+  outputs =
+    inputs@{ nixpkgs, ... }:
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          {
+            inputs.CreateShortcut.packages.${pkgs.stdenv.hostPlatform.system}.default
+          }
+        ];
+      };
+    };
+}
+```
